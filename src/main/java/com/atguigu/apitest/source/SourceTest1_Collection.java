@@ -27,6 +27,7 @@ public class SourceTest1_Collection {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
 
+
         // 从集合中读取数据
         DataStream<SensorReading> dataStream = env.fromCollection(Arrays.asList(
                 new SensorReading("sensor_1", 1547718199L, 35.8),

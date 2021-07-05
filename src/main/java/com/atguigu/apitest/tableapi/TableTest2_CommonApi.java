@@ -63,7 +63,8 @@ public class TableTest2_CommonApi {
 
         // 2. 表的创建：连接外部系统，读取数据
         // 2.1 读取文件
-        String filePath = "D:\\Projects\\BigData\\FlinkTutorial\\src\\main\\resources\\sensor.txt";
+        //D:\Projects\BigData\FlinkTutorial\src\main\resources\sensor.txt
+        String filePath = "D:\\MyCode\\learnspace\\FlinkTutorial\\FlinkTutorial\\src\\main\\resources\\sensor.txt";
         tableEnv.connect( new FileSystem().path(filePath))
                 .withFormat( new Csv())
                 .withSchema( new Schema()
@@ -86,7 +87,6 @@ public class TableTest2_CommonApi {
         // 聚合统计
         Table aggTable = inputTable.groupBy("id")
                 .select("id, id.count as count, temp.avg as avgTemp");
-
         // 3.2 SQL
         tableEnv.sqlQuery("select id, temp from inputTable where id = 'senosr_6'");
         Table sqlAggTable = tableEnv.sqlQuery("select id, count(id) as cnt, avg(temp) as avgTemp from inputTable group by id");

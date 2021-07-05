@@ -56,7 +56,6 @@ public class UdfTest1_ScalarFunction {
         // 打印输出
         tableEnv.toAppendStream(resultTable, Row.class).print("result");
         tableEnv.toAppendStream(resultSqlTable, Row.class).print("sql");
-
         env.execute();
     }
 

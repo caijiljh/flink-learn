@@ -16,6 +16,7 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.timestamps.BoundedOutOfOrdernessTimestampExtractor;
 import org.apache.flink.streaming.api.windowing.time.Time;
 import org.apache.flink.table.api.Over;
+import org.apache.flink.table.api.Slide;
 import org.apache.flink.table.api.Table;
 import org.apache.flink.table.api.Tumble;
 import org.apache.flink.table.api.java.StreamTableEnvironment;
@@ -54,12 +55,12 @@ public class TableTest5_TimeAndWindow {
         // 4. 将流转换成表，定义时间特性
 //        Table dataTable = tableEnv.fromDataStream(dataStream, "id, timestamp as ts, temperature as temp, pt.proctime");
         Table dataTable = tableEnv.fromDataStream(dataStream, "id, timestamp as ts, temperature as temp, rt.rowtime");
-
         tableEnv.createTemporaryView("sensor", dataTable);
 
         // 5. 窗口操作
         // 5.1 Group Window
         // table API
+        //dataTable.window(Slide.over())
         Table resultTable = dataTable.window(Tumble.over("10.seconds").on("rt").as("tw"))
                 .groupBy("id, tw")
                 .select("id, id.count, temp.avg, tw.end");

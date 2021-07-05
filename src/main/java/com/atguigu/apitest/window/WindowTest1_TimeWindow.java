@@ -46,7 +46,7 @@ public class WindowTest1_TimeWindow {
 //        DataStream<String> inputStream = env.readTextFile("D:\\Projects\\BigData\\FlinkTutorial\\src\\main\\resources\\sensor.txt");
 
         // socket文本流
-        DataStream<String> inputStream = env.socketTextStream("localhost", 7777);
+        DataStream<String> inputStream = env.socketTextStream("192.168.226.104", 7777);
 
         // 转换成SensorReading类型
         DataStream<SensorReading> dataStream = inputStream.map(line -> {
@@ -89,6 +89,7 @@ public class WindowTest1_TimeWindow {
                 .timeWindow(Time.seconds(15))
 //                .process(new ProcessWindowFunction<SensorReading, Object, Tuple, TimeWindow>() {
 //                })
+
                 .apply(new WindowFunction<SensorReading, Tuple3<String, Long, Integer>, Tuple, TimeWindow>() {
                     @Override
                     public void apply(Tuple tuple, TimeWindow window, Iterable<SensorReading> input, Collector<Tuple3<String, Long, Integer>> out) throws Exception {

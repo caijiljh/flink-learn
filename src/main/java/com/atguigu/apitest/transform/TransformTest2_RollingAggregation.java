@@ -63,6 +63,7 @@ public class TransformTest2_RollingAggregation {
         //        KeyedStream<SensorReading, String> keyedStream1 = dataStream.keyBy(SensorReading::getId);
 
         // 滚动聚合，取当前最大的温度值
+
         DataStream<SensorReading> resultStream = keyedStream.maxBy("temperature");
 
         resultStream.print("result");

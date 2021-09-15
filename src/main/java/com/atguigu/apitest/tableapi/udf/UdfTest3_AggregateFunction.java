@@ -57,7 +57,7 @@ public class UdfTest3_AggregateFunction {
         // 4.2 SQL
         tableEnv.createTemporaryView("sensor", sensorTable);
         Table resultSqlTable = tableEnv.sqlQuery("select id, avgTemp(temp) " +
-                " from sensor group by id");
+                " from sensor group by id") ;
 
         // 打印输出
         tableEnv.toRetractStream(resultTable, Row.class).print("result");
@@ -78,7 +78,7 @@ public class UdfTest3_AggregateFunction {
             return new Tuple2<>(0.0, 0);
         }
 
-        // 必须实现一个accumulate方法，来数据之后更新状态
+        // 必须实现一个accumulate方法，来数据之后更新状态 前acc后输入
         public void accumulate( Tuple2<Double, Integer> accumulator, Double temp ){
             accumulator.f0 += temp;
             accumulator.f1 += 1;

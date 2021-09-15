@@ -68,7 +68,7 @@ public class TableTest4_KafkaPipeLine {
 //                        .field("timestamp", DataTypes.BIGINT())
                         .field("temp", DataTypes.DOUBLE())
                 )
-                .createTemporaryTable("outputTable");
+                .createTemporaryTable("outputTable") ;
 
         resultTable.insertInto("outputTable");
 

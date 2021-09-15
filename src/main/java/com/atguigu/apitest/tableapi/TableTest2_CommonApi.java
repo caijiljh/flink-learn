@@ -95,7 +95,6 @@ public class TableTest2_CommonApi {
         tableEnv.toAppendStream(resultTable, Row.class).print("result");
         tableEnv.toRetractStream(aggTable, Row.class).print("agg");
         tableEnv.toRetractStream(sqlAggTable, Row.class).print("sqlagg");
-
         env.execute();
     }
 }

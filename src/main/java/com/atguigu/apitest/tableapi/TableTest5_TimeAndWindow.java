@@ -70,7 +70,7 @@ public class TableTest5_TimeAndWindow {
                 "from sensor group by id, tumble(rt, interval '10' second)");
 
         // 5.2 Over Window
-        // table API
+        // table API partition可选项
         Table overResult = dataTable.window(Over.partitionBy("id").orderBy("rt").preceding("2.rows").as("ow"))
                 .select("id, rt, id.count over ow, temp.avg over ow");
 
